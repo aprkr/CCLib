@@ -35,10 +35,10 @@
 ////////////////////////////////////////
 
 // Pinout configuration (Configured for Arduino Leonardo)
-int CC_RST   = 5;
-int CC_DC    = 4;
-int CC_DD_I  = 3;
-int CC_DD_O  = 2;
+int CC_RST   = 11;
+int CC_DC    = 10;
+int CC_DD_I  = 7;
+int CC_DD_O  = 6;
 
 // Change this if you are using an external led
 int LED      = LED_BUILTIN;

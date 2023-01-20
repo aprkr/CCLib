@@ -29,6 +29,7 @@ chipIDs = {
     0x95: 'CC2533',
     0x8D: 'CC2540',
     0x41: 'CC2541',
+	0x45: 'CC2545',
 }
 
 
@@ -91,7 +92,7 @@ class CC254X(ChipDriver):
 
 		# Populate variables
 		self.flashSize = self.chipInfo['flash'] * 1024
-		self.flashPageSize = 0x800
+		self.flashPageSize = 1024 # CC2544 page size is 1024 bytes
 		self.sramSize = self.chipInfo['sram'] * 1024
 		self.bulkBlockSize = 0x800
 
@@ -210,8 +211,10 @@ class CC254X(ChipDriver):
 
 		# Extract the useful info
 		return {
-			'flash' : pow(2, 4 + ((chipInfo[0] & 0x70) >> 4)), # in Kb
-			'usb'	: (chipInfo[0] & 0x08) != 0, # in Kb
+			# 'flash' : pow(2, 4 + ((chipInfo[0] & 0x70) >> 4)), # in Kb
+			'flash' : 32, # CC2545 has 32 Kb (bits 6:4 in chipInfo[0] are 111)
+			# 'flash' : 64, # idk
+			'usb'	: (chipInfo[0] & 0x08) != 0,
 			'sram'	: (chipInfo[1] & 0x07) + 1
 		}
 

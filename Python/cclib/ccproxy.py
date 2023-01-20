@@ -128,7 +128,8 @@ class CCLibProxy:
 		for port in ports:
 			try:
 				print("INFO: Checking %s" % port[0])
-				self.ser = serial.Serial(port[0])
+				self.ser = serial.Serial(port[0], baudrate=115200)
+				time.sleep(2)
 
 				# If ping fails, we will get an exception
 				self.sendFrame(CMD_PING)
@@ -200,7 +201,7 @@ class CCLibProxy:
 		"""
 
 		# Send the 4-byte command frame
-		self.ser.write( chr(cmd)+chr(c1)+chr(c2)+chr(c3) )
+		self.ser.write( bytearray([cmd,c1,c2,c3]) )
 		self.ser.flush()
 
 		# Read frame

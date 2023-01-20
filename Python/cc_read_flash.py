@@ -38,8 +38,8 @@ hexFile = CCHEXFile(opts['out'])
 for i in range(0, int(dbg.chipInfo['flash'] / 4)):
 
 	# Read CODE
-	chunk = dbg.readCODE( i * 0x1000, 0x1000 )
-
+	# chunk = dbg.readCODE( i * 0x1000, 0x1000 )
+	chunk = dbg.readXDATA(i * 0x1000, 0x1000)
 	# Write chunk to file
 	hexFile.stack(chunk)
 
